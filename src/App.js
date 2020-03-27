@@ -4,7 +4,7 @@ import classes from './App.scss'
 // Dummy Data
 import dummyData from './data/dummy-data'
 // Helper Func
-import { initialSetUser } from './utils/initialUser'
+import { initialSetUser } from './utils/initial'
 
 // Components
 import Navbar from './components/Navbar/Navbar';
@@ -15,6 +15,7 @@ function App() {
 	const [users, setUser] = useState(initialSetUser(dummyData))
 	const doneUser = useRef(users.filter(user => !user.isDone))
 	const unDoneUser = useRef(users.filter(user => user.isDone))
+
 	const addDoneUser = (addUser) => {
 		setUser(users => {
 			const index = users.indexOf(addUser)
