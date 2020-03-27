@@ -28,9 +28,8 @@ const ProfileCard = (props) => {
 				<span className={ProfileName}>
 					{ user.name }
 				</span>
-				<span className={isWin}>
-					{ user.isWin ? 'Win': ''}
-				</span>
+				{ user.isWin  && <span className={isWin}/> }
+
 			</div>
 		)
 	}

@@ -88,11 +88,13 @@ $profilePx: 30px;
 	border-color: transparent;
 }
 
+$isWin: 20px;
 .isWin {
-	border: 1px solid #eaeaea;
-	width: 15px;
-	height: 15px;
+	width:  $isWin;
+	height: $isWin;
 	position: absolute;
-	right: 4px;
-	top: 2px;
+	right: 10px;
+	top: 13px;
+	background-image: url('/goal.png');
+	background-size: cover;
 }
