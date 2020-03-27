@@ -13,7 +13,7 @@ const RenderCard = ({card, onFlipCard}) => {
 		classes.CardContainer
 
 	const Text = card.isWin ?
-	(<div className={classes.Text}>
+	(<div className={classes.Winner}>
 		Winner <br />50 Hour
 	</div>) :
 	(	<div className={classes.Text}>
@@ -37,11 +37,13 @@ const RenderCard = ({card, onFlipCard}) => {
 }
 
 const LuckyCard = (props) => {
-	const { users } = props
+	const { users, isSelectedUser, addDoneUser } = props
 	const [ cards, setCard ] = useState(initialManageCard(users))
 
 	const onFlipCard = (card) => {
 		if(card.disabled) return
+
+		if(!isSelectedUser) return
 
 		// Call Parent Function to Update Winner
 		setCard( prevCards => {
@@ -49,11 +51,8 @@ const LuckyCard = (props) => {
 			prevCards[index].disabled = true
 			return [...prevCards]
 		})
+		addDoneUser(isSelectedUser, card.isWin)
 	}
-
-	useEffect( () => {
-		console.log('Render Lucky', cards)
-	})
 
 	return (
 		<div className={classes.Container}>

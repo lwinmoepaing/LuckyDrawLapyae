@@ -8,6 +8,7 @@ export const initialSetUser = (users) => {
 		...user,
 		isDone: false,
 		isSelected: false,
+		isWinner: false
 	}))
 }
 

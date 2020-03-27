@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useCallback } from 'react'
+import React, { useMemo, useCallback } from 'react'
 import classes from './ProfileCard.scss'
 
 const ProfileCard = (props) => {
@@ -14,12 +14,8 @@ const ProfileCard = (props) => {
 		unSelectAllUser()
 	}, [type, unSelectAllUser])
 
-	useEffect( () => {
-		console.log('count', type)
-	}, [type, users])
-
 	const RenderItem = ({user}) => {
-		const { ProfileContainer, ProfileImage, ProfileName, Selected} = classes
+		const { ProfileContainer, ProfileImage, ProfileName, Selected, isWin} = classes
 		const ContainerStyle = user.isSelected ? [ ProfileContainer, Selected ].join(' ') :  [ProfileContainer]
 		return	(
 			<div
@@ -31,6 +27,9 @@ const ProfileCard = (props) => {
 				</span>
 				<span className={ProfileName}>
 					{ user.name }
+				</span>
+				<span className={isWin}>
+					{ user.isWin ? 'Win': ''}
 				</span>
 			</div>
 		)

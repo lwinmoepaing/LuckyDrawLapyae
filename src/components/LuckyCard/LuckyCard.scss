@@ -12,7 +12,7 @@ $cardWidth: 80px;
 
 .CardContainer {
 	width: 100%;
-	margin: 8px  7px;
+	margin: 8px  16px;
 	max-width: $cardWidth;
 	height: $cardWidth * 1.8;
 	border-radius: 4px;
@@ -63,11 +63,16 @@ $cardWidth: 80px;
 	background-position: center center;
 }
 
-.Text {
+.Text, .Winner {
+	font-size: 18px;
 	text-align: center;
-	padding-top: 52px;
+	padding-top: 48px;
 	color: #ffffff;
 	font-weight: bold;
+}
+
+.Winner {
+	color: #efff00;
 }
 
 .CardFlip {
@@ -79,7 +84,7 @@ $cardWidth: 80px;
 	position: absolute;
 	top: 50%;
 	right: 10px;
-	font-size: 20px;
+	font-size: 32px;
 	transform: translate(0%, -50%);
 }
 

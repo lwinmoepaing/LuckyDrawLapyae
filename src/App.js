@@ -13,16 +13,20 @@ import LuckyCard from './components/LuckyCard/LuckyCard'
 
 function App() {
 	const [users, setUser] = useState(initialSetUser(dummyData))
-	const doneUser = useRef(users.filter(user => !user.isDone))
-	const unDoneUser = useRef(users.filter(user => user.isDone))
+	const doneUser = useRef(users.filter(user => user.isDone))
+	const unDoneUser = useRef(users.filter(user => !user.isDone))
 
-	const addDoneUser = (addUser) => {
+	const addDoneUser = (addUser, isWin) => {
 		setUser(users => {
 			const index = users.indexOf(addUser)
 			users[index].isDone = true
 			users[index].isSelected = false
+			users[index].isWin = isWin
 			setDoneUser(users)
 			setUndoneUser(users)
+			if(unDoneUser.current.length){
+				addSelectUser(unDoneUser.current[0])
+			}
 			return [...users]
 		})
 	}
@@ -36,18 +40,17 @@ function App() {
 			// Sepcific Select True
 			setUnSelectUsers[index].isSelected = true
 			// We Use Current
-			setDoneUser(setUnSelectUsers)
+			setUndoneUser(setUnSelectUsers)
 			return [...setUnSelectUsers]
 		})
 	}
 
 	const unSelectAllUser = () => {
 		// Firstly, set All user to False
-		console.log('Click')
 		setUser(users => {
 			const setUnSelectUsers = users.map(user => ({ ...user, isSelected: false}))
 			// We Use Current
-			setDoneUser(setUnSelectUsers)
+			setUndoneUser(setUnSelectUsers)
 			return [
 				...setUnSelectUsers
 			]
@@ -55,11 +58,11 @@ function App() {
 	}
 
 	const setDoneUser = (setDoneUserProps) => {
-		doneUser.current = [ ...setDoneUserProps ].filter(user => !user.isDone)
+		doneUser.current = [ ...setDoneUserProps ].filter(user => user.isDone)
 	}
 
 	const setUndoneUser = (unDoneUserProps) => {
-		unDoneUser.current = [ ...unDoneUserProps ].filter(user => user.isDone)
+		unDoneUser.current = [ ...unDoneUserProps ].filter(user => !user.isDone)
 	}
 
   return (
@@ -67,14 +70,18 @@ function App() {
 			<Navbar />
 			<div className={classes.Container}>
 				<ProfileCard
-					users={doneUser.current}
+					users={unDoneUser.current}
 					addSelectUser={addSelectUser}
 					unSelectAllUser={unSelectAllUser}
 					type='unDone'
 				/>
-				<LuckyCard users={users} />
+				<LuckyCard
+				 	users={users}
+					isSelectedUser={unDoneUser.current.find(user => user.isSelected)}
+					addDoneUser={addDoneUser}
+				/>
 				<ProfileCard
-					users={unDoneUser.current}
+					users={doneUser.current}
 					unSelectAllUser={unSelectAllUser}
 					type='done'
 				/>

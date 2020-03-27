@@ -7,8 +7,9 @@ $border: 0px;
 	flex: 1;
 	max-width: $width;
 	flex-basis: $width;
-	// border: 1px solid #dfdfdf;
-	height: calc(100vh - 70px);
+	background:#f1f1f1;
+	margin-top: 8px;
+	height: calc(100vh - 90px);
 	overflow-y: scroll;
 	position: relative;
 	border-radius: 0.6rem;
@@ -47,6 +48,7 @@ $border: 0px;
 	cursor: pointer;
 	position: relative;
 	z-index: 2;
+	background-color: #ffffff;
 }
 
 .PositionOverLay {
@@ -84,4 +86,13 @@ $profilePx: 30px;
 	background: #5a82f5;
 	color: #ffffff;
 	border-color: transparent;
+}
+
+.isWin {
+	border: 1px solid #eaeaea;
+	width: 15px;
+	height: 15px;
+	position: absolute;
+	right: 4px;
+	top: 2px;
 }
