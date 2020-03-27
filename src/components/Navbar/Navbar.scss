@@ -1,5 +1,13 @@
 @import '../../constants/variable.scss';
 
+$fontHeight: 60px;
+
 .Navbar {
 	background: $primary;
+	font-size: 20px;
+	height: $fontHeight;
+	line-height: $fontHeight;
+	text-align: center;
+	font-weight: bold;
 }
+
