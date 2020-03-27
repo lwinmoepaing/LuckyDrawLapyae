@@ -1,0 +1,7 @@
+@import './constants/variable.scss';
+
+.Container {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+}

@@ -1,0 +1,87 @@
+@import '../../constants/variable.scss';
+
+$width: 20%;
+$border: 0px;
+
+.Container {
+	flex: 1;
+	max-width: $width;
+	flex-basis: $width;
+	// border: 1px solid #dfdfdf;
+	height: calc(100vh - 70px);
+	overflow-y: scroll;
+	position: relative;
+	border-radius: 0.6rem;
+	padding: 8px 4px;
+}
+
+.Container::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.123);
+	background-color: #fafafa;
+	border-radius: $border;
+}
+
+.Container::-webkit-scrollbar
+{
+	width: $border;
+	background-color: #fafafa;
+}
+
+.Container::-webkit-scrollbar-thumb
+{
+	border-radius: $border;
+	background-image: -webkit-gradient(linear,
+									   left bottom,
+									   left top,
+									   color-stop(0.44, rgb(122,153,217)),
+									   color-stop(0.72, rgb(73,125,189)),
+									   color-stop(0.86, rgb(0, 111, 175)));
+}
+
+.ProfileContainer {
+	border: 1px solid #dfdfdf;
+	padding: 5px;
+	border-radius: 1rem;
+	margin: 4px;
+	cursor: pointer;
+	position: relative;
+	z-index: 2;
+}
+
+.PositionOverLay {
+	background: transparent;
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+
+}
+
+$profilePx: 30px;
+
+.ProfileImage {
+	width: $profilePx;
+	height: $profilePx;
+	border-radius: $profilePx;
+	border: 1px solid #dfdfdf;
+	display: inline-block;
+	text-align: center;
+	line-height: $profilePx;
+	font-weight: bold;
+	color: #ffffff;
+	background-color: #3b9dff;
+}
+
+.ProfileName {
+	text-align: center;
+	display: inline-block;
+	padding-left: 9px;
+}
+
+.Selected {
+	background: #5a82f5;
+	color: #ffffff;
+	border-color: transparent;
+}

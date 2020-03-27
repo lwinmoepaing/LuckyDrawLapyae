@@ -1,9 +1,14 @@
 import User from '../model/User'
-const data = []
-data.push(new User(`Lwin1`))
-data.push(new User(`Lwin2`))
-data.push(new User(`Lwin3`))
-data.push(new User(`Lwin4`))
-data.push(new User(`Lwin5`))
+const data = [
+	new User(`Kaunt Thu Lin`),
+	new User(`Htet Naing Lin`),
+	new User(`Lapyae `),
+	new User(`Min Arkar Soe`),
+	new User(`Lwin5`),
+	new User(`Kaunt Thu Lin`),
+	new User(`Htet Naing Lin`),
+	new User(`Kaunt Thu Lin`),
+	new User(`Htet Naing Lin`),
+]
 
 export default data
