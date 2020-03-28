@@ -82,10 +82,15 @@ $profilePx: 30px;
 	padding-left: 9px;
 }
 
+.Active {
+	display: none;
+}
+
 .Selected {
 	background: #5a82f5;
 	color: #ffffff;
 	border-color: transparent;
+	display: block;
 }
 
 $isWin: 20px;

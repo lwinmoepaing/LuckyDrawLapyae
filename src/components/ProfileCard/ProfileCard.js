@@ -15,11 +15,14 @@ const ProfileCard = (props) => {
 	}, [type, unSelectAllUser])
 
 	const RenderItem = ({user}) => {
-		const { ProfileContainer, ProfileImage, ProfileName, Selected, isWin} = classes
-		const ContainerStyle = user.isSelected ? [ ProfileContainer, Selected ].join(' ') :  [ProfileContainer]
+		const { ProfileContainer, ProfileImage, ProfileName, Selected, isWin, Active} = classes
+		let ContainerStyle = !user.isDone ? [ ProfileContainer, Active ] :  [ProfileContainer]
+		if(user.isSelected) {
+			ContainerStyle.push(Selected)
+		}
 		return	(
 			<div
-				className={ContainerStyle}
+				className={ContainerStyle.join(' ')}
 				onClick={ () => selectUser(user)}
 			>
 				<span className={ProfileImage}>

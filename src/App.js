@@ -4,15 +4,18 @@ import classes from './App.scss'
 // Dummy Data
 import dummyData from './data/dummy-data'
 // Helper Func
-import { initialSetUser } from './utils/initial'
+import { initialSetUser, shuffle } from './utils/initial'
 
 // Components
 import Navbar from './components/Navbar/Navbar';
 import ProfileCard from './components/ProfileCard/ProfileCard'
 import LuckyCard from './components/LuckyCard/LuckyCard'
+import UserList from './components/UserList/UserList';
 
 function App() {
 	const [users, setUser] = useState(initialSetUser(dummyData))
+	const [startGame, setStart] = useState(false)
+	const [gameOver] = useState(false)
 	const doneUser = useRef(users.filter(user => user.isDone))
 	const unDoneUser = useRef(users.filter(user => !user.isDone))
 
@@ -25,15 +28,15 @@ function App() {
 			setDoneUser(users)
 			setUndoneUser(users)
 			if(unDoneUser.current.length){
-				addSelectUser(unDoneUser.current[0])
+				setSelectUser(unDoneUser.current[0])
 			}
 			return [...users]
 		})
 	}
 
-	const addSelectUser = (addUser) => {
+	const setSelectUser = (addUser) => {
 		setUser(users => {
-			// Firstly, set All user to False
+			// Firstly, Unselect All user
 			const setUnSelectUsers = users.map(user => ({ ...user, isSelected: false}))
 			// Find This User
 			const index = users.indexOf(addUser)
@@ -65,13 +68,61 @@ function App() {
 		unDoneUser.current = [ ...unDoneUserProps ].filter(user => !user.isDone)
 	}
 
-  return (
-    <div className="App">
-			<Navbar />
+	const onDelete = (id) => {
+		setUser(prevUser => {
+			return prevUser.filter(user => user.id !== id )
+		})
+	}
+
+	const onStart = () => {
+		setUser(prevUser => {
+			const shuffleUser = shuffle(prevUser)
+			setDoneUser(shuffleUser)
+			setUndoneUser(shuffleUser)
+			if(unDoneUser.current.length){
+				setSelectUser(unDoneUser.current[0])
+			}
+		  return [
+				...shuffleUser
+			]
+		})
+
+		setStart(true)
+	}
+
+	const addUser = (name) => {
+		const id = new Date().getMilliseconds() + Math.floor( Math.random() * 1000000)
+
+		setUser(prevUser => {
+			return  [
+				...prevUser,
+				{
+					id,
+					name,
+					url: '',
+					isDone: false,
+					isSelected: false,
+					isWinner: false
+				}
+			]
+		})
+	}
+
+	let showContainer = (
+		<UserList
+			users={users}
+			addUser={addUser}
+			onDelete={onDelete}
+			onStart={onStart}
+		/>
+	)
+
+	if(startGame) {
+		showContainer = (
 			<div className={classes.Container}>
 				<ProfileCard
 					users={unDoneUser.current}
-					addSelectUser={addSelectUser}
+					addSelectUser={setSelectUser}
 					unSelectAllUser={unSelectAllUser}
 					type='unDone'
 				/>
@@ -86,6 +137,16 @@ function App() {
 					type='done'
 				/>
 			</div>
+		)
+	}
+
+	if(gameOver) {
+		showContainer = <div> Game Over </div>
+	}
+  return (
+    <div className="App">
+			<Navbar />
+			{ showContainer }
     </div>
   );
 }

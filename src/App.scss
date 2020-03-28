@@ -5,3 +5,10 @@
 	flex-direction: row;
 	justify-content: space-around;
 }
+
+.ContainerStart {
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	padding: 4px 0 0 10px;
+}
